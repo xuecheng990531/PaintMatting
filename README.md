@@ -6,10 +6,15 @@ This README provides instructions for using An Iterative Approach for High-Quali
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.9-ff69b4.svg" /></a>
 <a href= "https://pytorch.org/"> <img src="https://img.shields.io/badge/PyTorch-2.1-2BAF2B.svg" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+
 ## Prerequisites
 - PyTorch 2.0
 - Python 3.9
 - You can use requirements to install the environment, but I wouldn't recommend it as I haven't tested it.
+
+## Datasets
+You can put the data files in the `MPM_MTM_Modules` folder as well as in `MPM_Mask_Acquire`. In this article, we use `AIM-500` and `Distinctions-646` datasets for related experiments.
+
 ## Usage
 
 1. Generate Accurate Binary Mask
