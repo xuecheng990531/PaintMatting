@@ -30,7 +30,7 @@ def get_args():
     parser.add_argument('--nEpochs', type=int, default=1000, help='number of epochs to train')
     parser.add_argument('--save_epoch', type=int, default=100, help='number of epochs to save model')
     parser.add_argument('--device', type=str, default='cuda', help='cuda device')
-    parser.add_argument('--modelname', type=str, required=True, help='model name')
+    parser.add_argument('--modelname', type=str,default='MTM', help='model name')
     parser.add_argument('--fe', type=str, required=True, help='encoder is frozen')
     parser.add_argument('--norm', type=str,required=True, help='dataset is norm?')
 
