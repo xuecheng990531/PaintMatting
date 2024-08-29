@@ -1,2 +1,2 @@
-# PaintMatting
-This is the offical code of 'Unsupervised Image Matting Algorithm with Inpaint Method'
+# MPM
+An Iterative Approach for High-Quality Mask Generation in Image Matting
