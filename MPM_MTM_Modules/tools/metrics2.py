@@ -1,5 +1,20 @@
 import numpy as np
 import torch
+from torch import nn
+from scipy.ndimage import gaussian_filter
+from scipy.ndimage import distance_transform_edt
+from skimage.measure import label, regionprops
+
+
+def fusion_loss(img, alpha_gt, alpha, eps=1e-6):
+    smoothloss=nn.SmoothL1Loss()
+    # paper loss
+    L_alpha = torch.sqrt(torch.pow(alpha_gt - alpha, 2.) + eps).mean()
+    gt_msk_img = torch.cat((alpha_gt, alpha_gt, alpha_gt), 1) * img
+    alpha_img = torch.cat((alpha, alpha, alpha), 1) * img
+    L_color = torch.sqrt(torch.pow(gt_msk_img - alpha_img, 2.) + eps).mean()
+    L_smooth=smoothloss(alpha,alpha_gt)
+    return L_alpha + L_color+L_smooth
 
 def calculate_sad_mse_mad(predict_old, alpha, trimap):
     # Ensure the input tensors are on the CPU and convert them to NumPy arrays
@@ -37,13 +52,6 @@ def calculate_sad_mse_mad(predict_old, alpha, trimap):
     return sad_diff_avg, mse_diff_avg, mad_diff_avg
 
 
-import numpy as np
-import torch
-from scipy.ndimage import gaussian_filter
-import numpy as np
-import torch
-from scipy.ndimage import distance_transform_edt
-from skimage.measure import label, regionprops
 
 def compute_gradient_whole_image(pd, gt):
     batch_size = pd.shape[0]

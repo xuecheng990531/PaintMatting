@@ -8,7 +8,6 @@ import os
 from model.model730_refine import Unet
 from tools.dataset import  matting_datasets
 from torchvision.utils import  save_image
-from tools.metrics import compute_mse,compute_sad,fusion_loss
 from tools.metrics2 import *
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
