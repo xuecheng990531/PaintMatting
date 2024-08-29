@@ -6,15 +6,6 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 import os
 from model.model730_refine import Unet
-# from model.model730_norefine import Unet
-from compare_models.semantic_human_matting.model import net
-from compare_models.aim.model import AimNet
-from compare_models.modenet.model import MODNet
-from compare_models.p3mnet.model import ViTAE_noRC_MaxPooling_Matting
-from compare_models.dim import DIM
-from compare_models.HAttMatting.model import Model
-from compare_models.LSANet.model import theModel
-from compare_models.rvm.model import MattingNetwork
 from tools.dataset import  matting_datasets
 from torchvision.utils import  save_image
 from tools.metrics import compute_mse,compute_sad,fusion_loss
@@ -47,9 +38,6 @@ def get_args():
     args = parser.parse_args()
     print(args)
     return args
-
-
-
 
 def main():
     print("=============> Loading args")
@@ -92,25 +80,11 @@ def main():
         backbone_name='resnet18',
         encoder_freeze=frozen
         ).to(device)
-    # model=net().to(device)
-    # model=AimNet().to(device)
-    # model=MODNet().to(device)
-    # model=DIM().to(device)
-    # model=Generator(encoder="res_shortcut_encoder_29", decoder="res_shortcut_decoder_22").to(device)
-    # model=theModel().to(device)
-    # model=MattingNetwork().to(device)
-    model=nn.DataParallel(model)
+
     optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()),lr=args.lr,weight_decay=0.0005,betas=(0.9, 0.999))
     
     print("============> Start Train ! ...")
     epoch = 0
-    # trainlog = Train_Log(args)
-    # if args.finetuning:
-    #     start_epoch, model = trainlog.load_model(model)
-    best_mse=99999
-    best_sad=99999
-    best_grad=99999
-    best_conn=99999
     loss_ = 0
     while epoch<=args.nEpochs:
         model.train()
@@ -148,8 +122,6 @@ def main():
 
                     image, prompt, alpha, trimap = image.to(device), prompt.to(device), alpha.to(device),trimap.to(device)
 
-                    # alpha_pre=model(image,False)
-                    # pred_alpha=model(image,trimap)
                     pred_alpha=model(image,prompt)
                     sad, mse, mad=calculate_sad_mse_mad(pred_alpha,alpha,trimap)
                     grad=compute_gradient_whole_image(pred_alpha,alpha)
@@ -165,26 +137,16 @@ def main():
                     optimizer.zero_grad()
                     optimizer.step()
 
-                    if sad<best_sad and sad!=0:
-                        best_sad=sad
-                    if mse<best_mse and mse!=0:
-                        best_mse=mse
-                    if grad<best_grad and grad!=0:
-                        best_grad=grad
-                    if conn<best_conn and conn!=0:
-                        best_conn=conn
-
                     # Add scalar values to the writer
                     writer.add_scalar('sad', sad, epoch)
                     writer.add_scalar('mse', mse, epoch)
+                    writer.add_scalar('sad', conn, epoch)
+                    writer.add_scalar('mse', grad, epoch)
 
                     writer.close()
                     print(
                     'All_model:\n Best MSE:{:.4f}---Best SAD:{:.4f}----Best Grad:{:.4f}---Best Conn:{:.4f}'
-                    .format(best_mse, best_sad,best_grad,best_conn))
-                    # print(
-                    # 'All_model:\nBest MSE:{:.4f}---Best SAD:{:.4f}'
-                    # .format(mse, sad))
+                    .format(mse, sad,grad,conn))
     
         epoch+=1
 
