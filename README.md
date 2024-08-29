@@ -10,7 +10,7 @@ This is the official code of "An Iterative Approach for High-Quality Mask Genera
 ## Prerequisites
 - PyTorch 2.0
 - Python 3.9
-- You can use requirements to install the environment, but I wouldn't recommend it as I haven't tested it.
+- You can use `pip install requirements.txt` to install the environment, but I wouldn't recommend it as I haven't tested it.
 
 ## Datasets
 You can put the data files in the `MPM_MTM_Modules` folder as well as in `MPM_Mask_Acquire`. In this article, we use `AIM-500` and `Distinctions-646` datasets for related experiments.
