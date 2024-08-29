@@ -2,7 +2,7 @@
 
 This README provides instructions for using An Iterative Approach for High-Quality Mask Generation in Image Matting (MPM).
 
-<p align="center"><img src="images/paintseg.png" width="700"/></p>
+<p align="center"><img src="imgs/MPM.png" width="700"/></p>
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.9-ff69b4.svg" /></a>
 <a href= "https://pytorch.org/"> <img src="https://img.shields.io/badge/PyTorch-2.1-2BAF2B.svg" /></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
