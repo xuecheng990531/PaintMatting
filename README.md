@@ -25,4 +25,3 @@ This README provides instructions for using An Iterative Approach for High-Quali
     python main.py  --datasets {your datesets location} --fe {frozen encoder?} --norm {is norm your datasets image?}
     ```
 
-That's it! You're ready to use MPM with PyTorch and Python 3.9.
