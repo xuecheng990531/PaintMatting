@@ -1,6 +1,6 @@
-# MPM
+# An Iterative Approach for High-Quality Mask Generation in Image Matting
 
-This README provides instructions for using An Iterative Approach for High-Quality Mask Generation in Image Matting (MPM).
+This is the official code of "An Iterative Approach for High-Quality Mask Generation in Image Matting (MPM)".
 
 <p align="center"><img src="imgs/mpms.png" width="700"/></p>
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.9-ff69b4.svg" /></a>
