@@ -464,7 +464,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--dataset",
-        default='datasets/voc',
+        default='datasets/aim500',
         type=str,
         nargs="?",
         help="dataset",
